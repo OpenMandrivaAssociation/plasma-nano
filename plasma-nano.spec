@@ -7,8 +7,6 @@ Summary:	Plasma interface for embedded devices
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/%{name}-%{version}.tar.xz
 License:	GPLv2/LGPLv2/LGPLv2.1
 Group:		Graphical desktop/KDE
-BuildRequires:	cmake
-BuildRequires:	ninja
 BuildRequires:	cmake(ECM)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
@@ -18,9 +16,10 @@ BuildRequires:	cmake(Qt5Test)
 BuildRequires:	cmake(KF5Plasma)
 BuildRequires:	cmake(KF5WindowSystem)
 BuildRequires:	cmake(KF5Wayland)
+BuildRequires:	cmake(KF5I18n)
 
 %description
-Plasma interface for embedded devices
+Plasma interface for embedded devices.
 
 %prep
 %autosetup -p1
