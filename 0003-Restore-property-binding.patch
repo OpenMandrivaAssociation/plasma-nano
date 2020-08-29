@@ -1,0 +1,28 @@
+From 37809920fa192fbd9eeeb28f37bce93f5d814ad6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonah=20Br=C3=BCchert?= <jbb.prv@gmx.de>
+Date: Mon, 25 May 2020 19:01:37 +0200
+Subject: [PATCH 03/21] Restore property binding
+
+---
+ components/qml/StartupFeedback.qml | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/components/qml/StartupFeedback.qml b/components/qml/StartupFeedback.qml
+index 14bc9ba..dd80faa 100644
+--- a/components/qml/StartupFeedback.qml
++++ b/components/qml/StartupFeedback.qml
+@@ -45,7 +45,11 @@ Window {
+         icon.source = splashIcon;
+ 
+         if (color !== undefined) {
++            // Break binding to use custom color
+             background.color = color
++        } else {
++            // Recreate binding
++            background.color = Qt.binding(function() { return colorGenerator.dominant})
+         }
+ 
+         background.state = "open";
+-- 
+2.26.2
+

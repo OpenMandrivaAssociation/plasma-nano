@@ -1,0 +1,48 @@
+From bd7e64a54a8dac51d0f43fc8e1d412793b96e53c Mon Sep 17 00:00:00 2001
+From: l10n daemon script <scripty@kde.org>
+Date: Wed, 17 Jun 2020 14:13:08 +0200
+Subject: [PATCH 06/21] SVN_SILENT made messages (.desktop file) - always
+ resolve ours
+
+In case of conflict in i18n, keep the version of the branch "ours"
+To resolve a particular conflict, "git checkout --ours path/to/file.desktop"
+---
+ desktoptoolbox/metadata.desktop | 2 --
+ shell/metadata.desktop          | 1 -
+ 2 files changed, 3 deletions(-)
+
+diff --git a/desktoptoolbox/metadata.desktop b/desktoptoolbox/metadata.desktop
+index 8dcbf7b..90dfef7 100644
+--- a/desktoptoolbox/metadata.desktop
++++ b/desktoptoolbox/metadata.desktop
+@@ -25,7 +25,6 @@ Name[sk]=Nástrojový panel Plasma Nano
+ Name[sl]=Orodjarna Plasma Nano
+ Name[sv]=Plasma Nano verktygslåda
+ Name[uk]=Набір інструментів Плазми Nano
+-Name[x-test]=xxPlasma Nano Toolboxxx
+ Name[zh_CN]=Plasma Nano 工具箱
+ Name[zh_TW]=Plasma Nano 工具箱
+ Comment=Manage Wallpaper and Widgets
+@@ -54,7 +53,6 @@ Comment[sk]=Spravovať plochy a widgety
+ Comment[sl]=Upravljaj z ozadji in gradniki
+ Comment[sv]=Hantera skrivbordsunderlägg och grafiska komponenter
+ Comment[uk]=Керування шпалерами та віджетами
+-Comment[x-test]=xxManage Wallpaper and Widgetsxx
+ Comment[zh_CN]=管理壁纸和部件
+ Comment[zh_TW]=管理桌布及元件
+ 
+diff --git a/shell/metadata.desktop b/shell/metadata.desktop
+index 1feff01..ed03f24 100644
+--- a/shell/metadata.desktop
++++ b/shell/metadata.desktop
+@@ -26,7 +26,6 @@ Name[sk]=Plasma Nano
+ Name[sl]=Plasma Nano
+ Name[sv]=Plasma Nano
+ Name[uk]=Плазма Nano
+-Name[x-test]=xxPlasma Nanoxx
+ Name[zh_CN]=Plasma Nano
+ Name[zh_TW]=Plasma Nano
+ Type=Service
+-- 
+2.26.2
+

@@ -1,0 +1,33 @@
+From 6b936dc2129802e48cea9022c56842f14e648f26 Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Thu, 30 Jul 2020 14:56:51 +0200
+Subject: [PATCH 17/21] use animators
+
+---
+ components/qml/StartupFeedback.qml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/components/qml/StartupFeedback.qml b/components/qml/StartupFeedback.qml
+index 32197d9..2300bab 100644
+--- a/components/qml/StartupFeedback.qml
++++ b/components/qml/StartupFeedback.qml
+@@ -151,14 +151,14 @@ Window {
+                             duration: units.longDuration
+                             easing.type: Easing.InOutQuad
+                         }
+-                        NumberAnimation {
++                        XAnimator {
+                             target: background
+                             property: "x"
+                             to: 0
+                             duration: units.longDuration
+                             easing.type: Easing.InOutQuad
+                         }
+-                        NumberAnimation {
++                        YAnimator {
+                             target: background
+                             property: "y"
+                             to: 0
+-- 
+2.26.2
+

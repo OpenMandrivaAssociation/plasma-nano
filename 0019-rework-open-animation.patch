@@ -1,0 +1,227 @@
+From c3719d661c1cd8b81519859d27f212ec490d4c4c Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Fri, 31 Jul 2020 13:04:34 +0200
+Subject: [PATCH 19/21] rework open animation
+
+remove all property bindings
+---
+ components/qml/StartupFeedback.qml | 182 +++++++++++++++--------------
+ 1 file changed, 95 insertions(+), 87 deletions(-)
+
+diff --git a/components/qml/StartupFeedback.qml b/components/qml/StartupFeedback.qml
+index 0e0481e..cd1d97d 100644
+--- a/components/qml/StartupFeedback.qml
++++ b/components/qml/StartupFeedback.qml
+@@ -40,8 +40,8 @@ Window {
+     function open(splashIcon, title, x, y, sourceIconSize, color) {
+         iconParent.scale = sourceIconSize/iconParent.width;
+         background.scale = 0;
+-        background.x = -window.width/2 + x
+-        background.y = -window.height/2 + y
++        backgroundParent.x = -window.width/2 + x
++        backgroundParent.y = -window.height/2 + y
+         window.title = title;
+         icon.source = splashIcon;
+         colorGenerator.source = splashIcon;
+@@ -74,105 +74,113 @@ Window {
+         }
+     }
+ 
+-    Item {
+-        id: iconParent
+-        z: 2
+-        anchors.centerIn: background
+-        width: units.iconSizes.enormous
+-        height: width
+-        PlasmaCore.IconItem {
+-            id: icon
+-            anchors.fill:parent
+-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+-        }
+-        DropShadow {
+-            anchors.fill: icon
+-            horizontalOffset: 0
+-            verticalOffset: 0
+-            radius: 8.0
+-            samples: 17
+-            color: "#80000000"
+-            source: icon
+-        }
+-    }
+ 
+-    Rectangle {
+-        id: background
++    Item {
++        id: backgroundParent
+         width: window.width
+         height: window.height
+ 
+-        color: colorGenerator.dominant
++        Item {
++            id: iconParent
++            z: 2
++            anchors.centerIn: background
++            width: units.iconSizes.enormous
++            height: width
++            PlasmaCore.IconItem {
++                id: icon
++                anchors.fill:parent
++                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
++            }
++            DropShadow {
++                anchors.fill: icon
++                horizontalOffset: 0
++                verticalOffset: 0
++                radius: 8.0
++                samples: 17
++                color: "#80000000"
++                source: icon
++            }
++        }
++
++        Rectangle {
++            id: background
++            anchors.fill: parent
+ 
+-        state: "closed"
++            color: colorGenerator.dominant
+ 
+-        states: [
+-            State {
+-                name: "closed"
+-                PropertyChanges {
+-                    target: window
+-                    visible: false
+-                }
+-                PropertyChanges {
+-                    target: fill
+-                    opacity: 0
+-                }
+-            },
+-            State {
+-                name: "open"
++            state: "closed"
++
++            states: [
++                State {
++                    name: "closed"
++                    PropertyChanges {
++                        target: window
++                        visible: false
++                    }
++                    PropertyChanges {
++                        target: fill
++                        opacity: 0
++                    }
++                },
++                State {
++                    name: "open"
+ 
+-                PropertyChanges {
+-                    target: window
+-                    visible: true
++                    PropertyChanges {
++                        target: window
++                        visible: true
++                    }
+                 }
+-            }
+-        ]
+-
+-        transitions: [
+-            Transition {
+-                from: "closed"
+-                SequentialAnimation {
+-                    ScriptAction {
+-                        script: { 
+-                            window.showMaximized();
++            ]
++
++            transitions: [
++                Transition {
++                    from: "closed"
++                    SequentialAnimation {
++                        ScriptAction {
++                            script: { 
++                                window.showMaximized();
++                            }
+                         }
+-                    }
+-                    ParallelAnimation {
+-                        ScaleAnimator {
+-                            target: background
+-                            from: background.scale
+-                            to: 1
+-                            duration: units.longDuration
+-                            easing.type: Easing.InOutQuad
++                        ParallelAnimation {
++                            ScaleAnimator {
++                                target: background
++                                from: background.scale
++                                to: 1
++                                duration: units.longDuration
++                                easing.type: Easing.InOutQuad
++                            }
++                            ScaleAnimator {
++                                target: iconParent
++                                from: iconParent.scale
++                                to: 1
++                                duration: units.longDuration
++                                easing.type: Easing.InOutQuad
++                            }
++                            XAnimator {
++                                target: backgroundParent
++                                from: backgroundParent.x
++                                to: 0
++                                duration: units.longDuration
++                                easing.type: Easing.InOutQuad
++                            }
++                            YAnimator {
++                                target: backgroundParent
++                                from: backgroundParent.y
++                                to: 0
++                                duration: units.longDuration
++                                easing.type: Easing.InOutQuad
++                            }
+                         }
+-                        ScaleAnimator {
+-                            target: iconParent
+-                            from: iconParent.scale
++                        OpacityAnimator {
++                            target: fill
++                            from: 0
+                             to: 1
+-                            duration: units.longDuration
+-                            easing.type: Easing.InOutQuad
+-                        }
+-                        XAnimator {
+-                            target: background
+-                            to: 0
+-                            duration: units.longDuration
+-                            easing.type: Easing.InOutQuad
+-                        }
+-                        YAnimator {
+-                            target: background
+-                            to: 0
+-                            duration: units.longDuration
++                            duration: units.shortDuration
+                             easing.type: Easing.InOutQuad
+                         }
+                     }
+-                    OpacityAnimator {
+-                        target: fill
+-                        from: 0
+-                        to: 1
+-                        duration: units.shortDuration
+-                        easing.type: Easing.InOutQuad
+-                    }
+                 }
+-            }
+-        ]
++            ]
++        }
+     }
+ }
+-- 
+2.26.2
+

@@ -1,0 +1,34 @@
+From 618e01432add3b7fefbc2816b67453929c1af63f Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Wed, 22 Jul 2020 12:22:40 +0200
+Subject: [PATCH 11/21] don't set manually all those flags
+
+---
+ components/fullscreenoverlay.cpp | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/components/fullscreenoverlay.cpp b/components/fullscreenoverlay.cpp
+index d645b88..b7a5bd9 100644
+--- a/components/fullscreenoverlay.cpp
++++ b/components/fullscreenoverlay.cpp
+@@ -39,6 +39,7 @@ FullScreenOverlay::FullScreenOverlay(QQuickWindow *parent)
+     setWindowState(Qt::WindowFullScreen);
+    // connect(this, &FullScreenOverlay::activeFocusItemChanged, this, [this]() {qWarning()<<"hide()";});
+     initWayland();
++    setWindowStates(Qt::WindowFullScreen);
+ }
+ 
+ FullScreenOverlay::~FullScreenOverlay()
+@@ -98,7 +99,8 @@ bool FullScreenOverlay::event(QEvent *e)
+         QPlatformSurfaceEvent *pe = static_cast<QPlatformSurfaceEvent*>(e);
+ 
+         if (pe->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
+-            KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::FullScreen);
++            //KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::FullScreen);
++           // setWindowStates(Qt::WindowFullScreen);
+             if (!m_acceptsFocus) {
+                 setFlags(flags() | Qt::FramelessWindowHint|Qt::WindowDoesNotAcceptFocus);
+                 //KWindowSystem::setType(winId(), NET::Dock);
+-- 
+2.26.2
+

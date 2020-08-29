@@ -1,0 +1,28 @@
+From f9e441efea46db7c6e9bd444eff640a3ddd0b85c Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Wed, 22 Jul 2020 18:04:29 +0200
+Subject: [PATCH 13/21] Revert "restore previous hacks"
+
+This reverts commit 1c0ed8551d136e31e067c9b10f3e006b85f4086e.
+---
+ components/fullscreenoverlay.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/components/fullscreenoverlay.cpp b/components/fullscreenoverlay.cpp
+index ab2ad22..b7a5bd9 100644
+--- a/components/fullscreenoverlay.cpp
++++ b/components/fullscreenoverlay.cpp
+@@ -99,8 +99,8 @@ bool FullScreenOverlay::event(QEvent *e)
+         QPlatformSurfaceEvent *pe = static_cast<QPlatformSurfaceEvent*>(e);
+ 
+         if (pe->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
+-            KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::FullScreen);
+-            setWindowStates(Qt::WindowFullScreen);
++            //KWindowSystem::setState(winId(), NET::SkipTaskbar | NET::SkipPager | NET::FullScreen);
++           // setWindowStates(Qt::WindowFullScreen);
+             if (!m_acceptsFocus) {
+                 setFlags(flags() | Qt::FramelessWindowHint|Qt::WindowDoesNotAcceptFocus);
+                 //KWindowSystem::setType(winId(), NET::Dock);
+-- 
+2.26.2
+

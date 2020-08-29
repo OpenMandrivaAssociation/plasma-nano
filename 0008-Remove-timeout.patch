@@ -1,0 +1,29 @@
+From 5b0c2d1cbf509e926dfd8466300687e62d0f56f6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jonah=20Br=C3=BCchert?= <jbb.prv@gmx.de>
+Date: Thu, 21 May 2020 14:41:10 +0200
+Subject: [PATCH 08/21] Remove timeout
+
+---
+ components/qml/StartupFeedback.qml | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/components/qml/StartupFeedback.qml b/components/qml/StartupFeedback.qml
+index af4875d..b0555f9 100644
+--- a/components/qml/StartupFeedback.qml
++++ b/components/qml/StartupFeedback.qml
+@@ -72,12 +72,6 @@ Window {
+         }
+     }
+ 
+-    Timer {
+-        running: background.state == "open"
+-        interval: 15000
+-        onTriggered: background.state = "closed";
+-    }
+-
+     Item {
+         id: iconParent
+         z: 2
+-- 
+2.26.2
+
