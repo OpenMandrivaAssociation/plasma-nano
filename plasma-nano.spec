@@ -2,7 +2,7 @@
 
 Name:		plasma-nano
 Version:	5.20.3
-Release:	2
+Release:	3
 Summary:	Plasma interface for embedded devices
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/%{name}-%{version}.tar.xz
 License:	GPLv2/LGPLv2/LGPLv2.1
