@@ -34,7 +34,6 @@ Plasma interface for embedded devices.
 
 %files -f plasma-nano.lang
 %{_libdir}/qt5/qml/org/kde/plasma/private/nanoshell
-%{_datadir}/kservices5/*.desktop
 %{_datadir}/metainfo/org.kde.plasma.nano.desktoptoolbox.appdata.xml
 %{_datadir}/plasma/packages/org.kde.plasma.nano.desktoptoolbox
 %{_datadir}/plasma/shells/org.kde.plasma.nano
