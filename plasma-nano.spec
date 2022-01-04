@@ -1,7 +1,7 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name:		plasma-nano
-Version:	5.23.4
+Version:	5.23.5
 Release:	1
 Summary:	Plasma interface for embedded devices
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/%{name}-%{version}.tar.xz
@@ -37,3 +37,5 @@ Plasma interface for embedded devices.
 %{_datadir}/metainfo/org.kde.plasma.nano.desktoptoolbox.appdata.xml
 %{_datadir}/plasma/packages/org.kde.plasma.nano.desktoptoolbox
 %{_datadir}/plasma/shells/org.kde.plasma.nano
+%{_datadir}/kservices5/plasma-applet-org.kde.plasma.nano.desktop
+%{_datadir}/kservices5/plasma-package-org.kde.plasma.nano.desktoptoolbox.desktop
