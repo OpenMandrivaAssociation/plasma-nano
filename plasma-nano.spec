@@ -3,9 +3,9 @@
 %define gitbranch Plasma/6.0
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
-Name:		plasma6-nano
+Name:		plasma-nano
 Version:	6.3.4
-Release:	%{?git:0.%{git}.}1
+Release:	%{?git:0.%{git}.}2
 Summary:	Plasma interface for embedded devices
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plasma-nano/-/archive/%{gitbranch}/plasma-nano-%{gitbranchd}.tar.bz2#/plasma-nano-%{git}.tar.bz2
@@ -31,25 +31,16 @@ BuildRequires:	cmake(KF6I18n)
 BuildRequires:	cmake(KF6Svg)
 BuildRequires:	cmake(KF6Service)
 BuildRequires:	cmake(KF6ItemModels)
+# Renamed after 6.0 2025-05-03
+%rename plasma6-nano
+
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 
 %description
 Plasma interface for embedded devices.
 
-%prep
-%autosetup -p1 -n plasma-nano-%{?git:%{gitbranchd}}%{!?git:%{version}}
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-%find_lang plasma-nano --all-name --with-html
-
-%files -f plasma-nano.lang
+%files -f %{name}.lang
 %{_qtdir}/qml/org/kde/plasma/private/nanoshell
 %{_datadir}/plasma/shells/org.kde.plasma.nano
