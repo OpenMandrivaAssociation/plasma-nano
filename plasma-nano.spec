@@ -4,7 +4,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name:		plasma-nano
-Version:	6.6.5
+Version:	6.7.1
 Release:	%{?git:0.%{git}.}1
 Summary:	Plasma interface for embedded devices
 %if 0%{?git:1}
